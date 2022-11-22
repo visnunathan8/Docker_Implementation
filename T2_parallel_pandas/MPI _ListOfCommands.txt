@@ -1,0 +1,78 @@
+THE COMMANDS USED IN THE DOCKER FOR TASK 2 ARE :
+
+docker pull husseinabdallah2/mpi4py-cluster:master
+
+docker images
+
+docker run -v /Users/macbook/Desktop/CommonDataDSD:/Data --name mpi4py_Manager --mount type=bind,source="$(pwd)"/Desktop/CommonDataDSD,target=/DS_COMP6231 -it facd914d2eb6 /bin/bash
+exit
+docker run -v /Users/macbook/Desktop/CommonDataDSD:/Data --name mpi4py_Worker1 --mount type=bind,source="$(pwd)"/Desktop/CommonDataDSD,target=/DS_COMP6231 -it facd914d2eb6 /bin/bash
+exit 
+docker run -v /Users/macbook/Desktop/CommonDataDSD:/Data --name mpi4py_Worker2 --mount type=bind,source="$(pwd)"/Desktop/CommonDataDSD,target=/DS_COMP6231 -it facd914d2eb6 /bin/bash
+exit 
+docker run -v /Users/macbook/Desktop/CommonDataDSD:/Data --name mpi4py_Worker3 --mount type=bind,source="$(pwd)"/Desktop/CommonDataDSD,target=/DS_COMP6231 -it facd914d2eb6 /bin/bash
+exit
+
+docker ps -a
+
+docker start d6e93c3b75f9 018ea2cb857a 4828255b97cd 529baf8f00b2
+
+docker network ls
+
+docker network inspect bridge
+
+docker exec -it 529baf8f00b2 /bin/bash
+passwd
+apt-get update
+apt-get install nano net-tools iputils-ping openssh-client openssh-server
+nano ~/machinefile
+pip install pandas==1.5.0
+service ssh start
+exit
+
+
+docker exec -it 4828255b97cd /bin/bash
+passwd
+apt-get update
+apt-get install nano net-tools iputils-ping openssh-client openssh-server
+pip install pandas==1.5.0
+service ssh start
+exit
+
+
+docker exec -it 018ea2cb857a /bin/bash
+passwd
+apt-get update
+apt-get install nano net-tools iputils-ping openssh-client openssh-server
+pip install pandas==1.5.0
+service ssh start
+exit
+
+
+docker exec -it d6e93c3b75f9 /bin/bash
+passwd
+apt-get update
+apt-get install nano net-tools iputils-ping openssh-client openssh-server
+pip install pandas==1.5.0
+service ssh start
+exit
+
+
+docker commit 529baf8f00b2 mpiimage
+
+docker exec -it 529baf8f00b2 /bin/bash
+nano /etc/ssh/sshd_config
+ssh root@172.17.0.4
+ssh root@172.17.0.3
+ssh root@172.17.0.2
+ssh-keygen -t rsa
+ssh-copy-id -i privatekey.pub root@172.17.0.4
+ssh-copy-id -i privatekey.pub root@172.17.0.3
+ssh-copy-id -i privatekey.pub root@172.17.0.2
+ssh-copy-id -i root@172.17.0.4
+ssh-copy-id -i root@172.17.0.3
+ssh-copy-id -i root@172.17.0.2
+mpiexec -n 4 -machinefile ~/machinefile python -m mpi4py Q1T3.py
+mpiexec -n 4 -machinefile ~/machinefile python -m mpi4py Q2T3.py
+mpiexec -n 4 -machinefile ~/machinefile python -m mpi4py Q3T3.py
+mpiexec -n 4 -machinefile ~/machinefile python -m mpi4py Q4T3.py 

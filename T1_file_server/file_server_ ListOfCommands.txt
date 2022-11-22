@@ -1,0 +1,69 @@
+THE COMMANDS USED IN THE DOCKER FOR TASK 1 ARE :
+
+docker pull ubuntu
+docker images
+docker network create --driver bridge ServerClient
+docker network ls
+docker run -v /Users/macbook/Desktop/Task1:/Task1 --name server --network ServerClient -it ubuntu /bin/bash
+exit
+docker run -v /Users/macbook/Desktop/Task1:/Task1 --name client1 --network ServerClient -it ubuntu /bin/bash
+exit
+docker run -v /Users/macbook/Desktop/Task1:/Task1 --name client2 --network ServerClient -it ubuntu /bin/bash
+exit
+docker run -v /Users/macbook/Desktop/Task1:/Task1 --name client3 --network ServerClient -it ubuntu /bin/bash
+exit
+docker start 3fbefa1e0ecd e4227016a493 c01bcc49b8d0 dd2220315473
+docker network inspect ServerClient
+
+docker exec -it 3fbefa1e0ecd /bin/bash
+apt-get update
+apt-get install python3
+apt-get install python3-tk
+apt-get install nano net-tools iputils-ping openssh-client openssh-server 
+exit
+
+docker exec -it e4227016a493 /bin/bash
+apt-get update
+apt-get install python3
+apt-get install python3-tk
+apt-get install nano net-tools iputils-ping openssh-client openssh-server 
+exit
+
+docker exec -it c01bcc49b8d0 /bin/bash
+apt-get update
+apt-get install python3
+apt-get install python3-tk
+apt-get install nano net-tools iputils-ping openssh-client openssh-server 
+exit
+
+docker exec -it dd2220315473 /bin/bash
+apt-get update
+apt-get install python3
+apt-get install python3-tk
+apt-get install nano net-tools iputils-ping openssh-client openssh-server 
+exit
+
+docker commit 3fbefa1e0ecd serverclientimage
+
+docker images
+
+docker exec -it 3fbefa1e0ecd /bin/bash
+ifconfig
+cd Task1
+nano server.py
+nano client.py
+python3 server.py
+
+docker exec -it e4227016a493 /bin/bash
+cd Task1
+python3 client.py
+
+
+docker exec -it c01bcc49b8d0 /bin/bash
+cd Task1
+python3 client.py
+
+
+docker exec -it dd2220315473 /bin/bash
+cd Task1
+python3 client.py
